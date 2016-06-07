@@ -18,5 +18,14 @@
     <ClInclude Include="Queue.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Page.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PageManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PageFrame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

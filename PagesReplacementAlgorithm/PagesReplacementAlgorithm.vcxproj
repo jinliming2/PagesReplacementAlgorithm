@@ -146,6 +146,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Page.h" />
+    <ClInclude Include="PageFrame.h" />
+    <ClInclude Include="PageManager.h" />
     <ClInclude Include="Queue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
