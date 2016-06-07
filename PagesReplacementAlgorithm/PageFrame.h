@@ -7,5 +7,5 @@ struct PageFrame {
     //“≥øÚID
     int id;
     //∂‘”¶“≥√Ê
-    Page* page;
+    Page* page = nullptr;
 };

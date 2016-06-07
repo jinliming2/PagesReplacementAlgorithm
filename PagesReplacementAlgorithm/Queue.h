@@ -63,7 +63,7 @@ inline bool Queue<T>::isEmpty() const {
 template<typename T>
 inline T & Queue<T>::getHead() const {
     if(isEmpty()) {
-        return nullptr;
+        throw "Empty Queue!";
     } else {
         return head->pNext->data;
     }
@@ -73,7 +73,7 @@ inline T & Queue<T>::getHead() const {
 template<typename T>
 inline T & Queue<T>::getTail() const {
     if(isEmpty()) {
-        return nullptr;
+        throw "Empty Queue!";
     } else {
         return tail->data;
     }
