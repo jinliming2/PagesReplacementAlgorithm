@@ -11,4 +11,7 @@ public:
     ~CLOCK();
     //请求页面
     Missing requireFrame(const int pageId, int& frameId, const bool alter = false);
+private:
+    //时钟指针
+    int pointer = 0;
 };
