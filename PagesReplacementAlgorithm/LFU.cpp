@@ -1,19 +1,20 @@
-#include "LRU.h"
+#include "LFU.h"
 //构造函数
-LRU::LRU() {
+LFU::LFU() {
 }
 
 //析构函数
-LRU::~LRU() {
+LFU::~LFU() {
 }
 
 //请求页面
-inline Missing LRU::requireFrame(const int pageId, int & frameId, const bool alter) {
+inline Missing LFU::requireFrame(const int pageId, int & frameId, const bool alter) {
     //页表命中
     for(auto frame : frames) {
         if(frame.page != nullptr && frame.page->id == pageId) {
             frameId = frame.id;
-            moveToTop(pageId);
+            //访问次数
+            frame.page->visit++;
             return No;
         }
     }
@@ -22,40 +23,29 @@ inline Missing LRU::requireFrame(const int pageId, int & frameId, const bool alt
         if(frame.page == nullptr) {
             frame.page = new Page;
             frame.page->id = pageId;
+            frame.page->visit = 1;
             frameId = frame.id;
-            pages.push(*frame.page);
             return MissingPage;
         }
     }
     //页面置换
-    Page p1 = pages.getBottom();
-    moveToTop(p1.id);
-    pages.pop();
+    Page* p1 = frames[0].page;
+    int min = p1->visit;
+    for(auto frame : frames) {
+        if(frame.page->visit < min) {
+            p1 = frame.page;
+            min = frame.page->visit;
+        }
+    }
     for(auto& frame : frames) {
-        if(frame.page->id == p1.id) {
+        if(frame.page->id == p1->id) {
             delete frame.page;
             frame.page = new Page;
             frame.page->id = pageId;
+            frame.page->visit = 1;
             frameId = frame.id;
-            pages.push(*frame.page);
             return MissingPageAndReplace;
         }
     }
     return No;
-}
-
-//将访问的页面移至栈顶
-inline void LRU::moveToTop(const int pageId) {
-    Stack<Page> temp(pages.size());
-    Page p1, p2;
-    do {
-        pages.pop(p1);
-        temp.push(p1);
-    } while(p1.id != pageId);
-    temp.pop();
-    while(!temp.isEmpty()) {
-        temp.pop(p2);
-        pages.push(p2);
-    }
-    pages.push(p1);
 }
