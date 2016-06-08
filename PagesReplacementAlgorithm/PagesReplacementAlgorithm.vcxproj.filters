@@ -39,6 +39,9 @@
     <ClInclude Include="FIFO.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="LFU.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LRU.cpp">
@@ -48,6 +51,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="FIFO.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LFU.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -6,7 +6,7 @@
  */
 class FIFO : public PageManager {
 public:
-    //最近最少使用置换算法
+    //先进先出置换算法
     FIFO();
     //析构函数
     ~FIFO();

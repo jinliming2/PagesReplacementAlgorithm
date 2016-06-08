@@ -2,6 +2,7 @@
 #include <ctime>
 #include "LRU.h"
 #include "FIFO.h"
+#include "LFU.h"
 using namespace std;
 
 #define __LENGTH__ 1000
@@ -70,17 +71,50 @@ int main(int argc, char** argv) {
         cout << frame_id << endl;
     }
     cout << "#################### FIFO ####################" << endl;
+    //最不常用置换算法
+    LFU LFUManager;
+    //缺页中断计数
+    unsigned int missing_page_lfu = 0;
+    //页面置换计数
+    unsigned int page_algorithm_lfu = 0;
+    //模拟请求
+    cout << "******************** LFU ********************" << endl;
+    for(auto i : arr) {
+        cout << "请求页号：" << i << "\t";
+        switch(LFUManager.requireFrame(i, frame_id)) {
+        case No:
+            cout << "页表命中！页框号：";
+            break;
+        case MissingPage:
+            missing_page_lfu++;
+            cout << "页表未命中，调入页面至页框号：";
+            break;
+        case MissingPageAndReplace:
+            missing_page_lfu++;
+            page_algorithm_lfu++;
+            cout << "页表未命中，页框已满，调入页面并替换页框号：";
+            break;
+        }
+        cout << frame_id << endl;
+    }
+    cout << "#################### LFU ####################" << endl;
     //输出结果
-    cout << "LRU算法，共计产生页面失效"
+    cout << "最近最少使用置换算法LRU算法，共计产生页面失效"
         << missing_page_lru
         << "次，其中发生页面置换"
         << page_algorithm_lru
         << "次。"
         << endl;
-    cout << "FIFO算法，共计产生页面失效"
+    cout << "先进先出置换算法FIFO算法，共计产生页面失效"
         << missing_page_fifo
         << "次，其中发生页面置换"
         << page_algorithm_fifo
+        << "次。"
+        << endl;
+    cout << "最不常用置换算法LFU算法，共计产生页面失效"
+        << missing_page_lfu
+        << "次，其中发生页面置换"
+        << page_algorithm_lfu
         << "次。"
         << endl;
     system("pause");
