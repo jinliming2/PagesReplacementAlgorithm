@@ -146,6 +146,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CLOCK.h" />
     <ClInclude Include="FIFO.h" />
     <ClInclude Include="LFU.h" />
     <ClInclude Include="LRU.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CLOCK.cpp" />
     <ClCompile Include="FIFO.cpp" />
     <ClCompile Include="LFU.cpp" />
     <ClCompile Include="LRU.cpp" />
