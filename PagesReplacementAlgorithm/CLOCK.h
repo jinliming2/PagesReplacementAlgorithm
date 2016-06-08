@@ -1,14 +1,17 @@
 #pragma once
 #include "PageManager.h"
 /**
- * 最不常用置换算法
+ * 时钟置换算法
  */
-class LFU : public PageManager {
+class CLOCK : public PageManager {
 public:
-    //最不常用置换算法
-    LFU();
+    //时钟置换算法
+    CLOCK();
     //析构函数
-    ~LFU();
+    ~CLOCK();
     //请求页面
     Missing requireFrame(const int pageId, int& frameId, const bool alter = false);
+private:
+    //时钟指针
+    int pointer = 0;
 };

@@ -5,6 +5,9 @@ LRU::LRU() {
 
 //析构函数
 LRU::~LRU() {
+    for(auto frame : frames) {
+        delete frame.page;
+    }
 }
 
 //请求页面

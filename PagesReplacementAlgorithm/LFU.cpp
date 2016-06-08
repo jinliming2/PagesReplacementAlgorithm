@@ -5,6 +5,9 @@ LFU::LFU() {
 
 //析构函数
 LFU::~LFU() {
+    for(auto frame : frames) {
+        delete frame.page;
+    }
 }
 
 //请求页面

@@ -5,6 +5,9 @@ FIFO::FIFO() {
 
 //析构函数
 FIFO::~FIFO() {
+    for(auto frame : frames) {
+        delete frame.page;
+    }
 }
 
 //请求页面
