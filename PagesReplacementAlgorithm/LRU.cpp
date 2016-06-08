@@ -1,10 +1,10 @@
 #include "LRU.h"
 //构造函数
-inline LRU::LRU() {
+LRU::LRU() {
 }
 
 //析构函数
-inline LRU::~LRU() {
+LRU::~LRU() {
 }
 
 //请求页面
@@ -16,7 +16,7 @@ inline Missing LRU::requireFrame(const int pageId, int & frameId, const bool alt
             return No;
         }
     }
-    for(auto frame : frames) {
+    for(auto& frame : frames) {
         if(frame.page == nullptr) {
             frame.page = new Page;
             frame.page->id = pageId;
@@ -28,8 +28,8 @@ inline Missing LRU::requireFrame(const int pageId, int & frameId, const bool alt
     Page p1 = pages.getBottom();
     moveToTop(p1.id);
     pages.pop();
-    for(auto frame : frames) {
-        if(frame.page == &p1) {
+    for(auto& frame : frames) {
+        if(frame.page->id == p1.id) {
             delete frame.page;
             frame.page = new Page;
             frame.page->id = pageId;
@@ -38,6 +38,7 @@ inline Missing LRU::requireFrame(const int pageId, int & frameId, const bool alt
             return MissingPageAndReplace;
         }
     }
+    return No;
 }
 
 //将访问的页面移至栈顶
