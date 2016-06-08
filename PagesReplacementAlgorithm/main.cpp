@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
     cout << "******************** CLOCK2 ********************" << endl;
     for(auto i : arr) {
         cout << "ÇëÇóÒ³ºÅ£º" << i << "\t";
-        switch(CLOCK2Manager.requireFrame(i, frame_id, (bool)(rand() % 2))) {
+        switch(CLOCK2Manager.requireFrame(i, frame_id, rand() % 2 == 0 ? false : true)) {
         case No:
             cout << "Ò³±íÃüÖÐ£¡Ò³¿òºÅ£º";
             break;
