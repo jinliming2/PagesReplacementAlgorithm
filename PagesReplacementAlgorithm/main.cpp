@@ -4,6 +4,7 @@
 #include "FIFO.h"
 #include "LFU.h"
 #include "CLOCK.h"
+#include "CLOCK2.h"
 using namespace std;
 
 #define __LENGTH__ 1000
@@ -126,6 +127,33 @@ int main(int argc, char** argv) {
         cout << frame_id << endl;
     }
     cout << "#################### CLOCK ####################" << endl;
+    //改进时钟置换算法
+    CLOCK2 CLOCK2Manager;
+    //缺页中断计数
+    unsigned int missing_page_clock2 = 0;
+    //页面置换计数
+    unsigned int page_algorithm_clock2 = 0;
+    //模拟请求
+    cout << "******************** CLOCK2 ********************" << endl;
+    for(auto i : arr) {
+        cout << "请求页号：" << i << "\t";
+        switch(CLOCK2Manager.requireFrame(i, frame_id, (bool)(rand() % 2))) {
+        case No:
+            cout << "页表命中！页框号：";
+            break;
+        case MissingPage:
+            missing_page_clock2++;
+            cout << "页表未命中，调入页面至页框号：";
+            break;
+        case MissingPageAndReplace:
+            missing_page_clock2++;
+            page_algorithm_clock2++;
+            cout << "页表未命中，页框已满，调入页面并替换页框号：";
+            break;
+        }
+        cout << frame_id << endl;
+    }
+    cout << "#################### CLOCK2 ####################" << endl;
     //输出结果
     cout << "最近最少使用置换算法LRU算法，共计产生页面失效"
         << missing_page_lru
@@ -149,6 +177,12 @@ int main(int argc, char** argv) {
         << missing_page_clock
         << "次，其中发生页面置换"
         << page_algorithm_clock
+        << "次。"
+        << endl;
+    cout << "改进时钟置换算法CLOCK2算法，共计产生页面失效"
+        << missing_page_clock2
+        << "次，其中发生页面置换"
+        << page_algorithm_clock2
         << "次。"
         << endl;
     system("pause");
